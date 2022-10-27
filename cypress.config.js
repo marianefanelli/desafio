@@ -1,8 +1,20 @@
-const { defineConfig } = require('cypress')
-
+const { defineConfig } = require("cypress");
+const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
+const addCucumberPreprocessorPlugin = require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
+const createEsBuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 module.exports = defineConfig({
   e2e: {
-    specPattern: ["**/*.feature", "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}"]
-  } 
-})
-
+    async setupNodeEvents(on, config) {
+    // implement node event listeners here
+    const bundler = createBundler({
+    plugins: [createEsBuildPlugin(config)],
+    });
+    on('file:preprocessor', bundler);
+    await addCucumberPreprocessorPlugin(on, config);
+    return config;
+    },
+    specPattern: "cypress/e2e/features/*.feature",
+    baseUrl: "http://sampleapp.tricentis.com/101/app.php",
+    chromeWebSecurity: false,
+  }
+});
