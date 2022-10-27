@@ -8,7 +8,14 @@
 - Git
 - VScode
 
-### Okay, now let's go to the next step
+### Okay, now let's go to the next step:
 - Clone this repository on Github
 - Run the command "npm install" in your terminal to install the required dependencies
 
+## Run the following script to run the tests
+
+```
+$ npm run test
+```
+
+## Thank you!
