@@ -14,6 +14,7 @@ class SendQuoteForm {
         this.el.inputPassword().type('Testando123')
         this.el.inputConfirmPass().type('Testando123')
         this.el.buttonSendEmail().click()
+        cy.wait(5000)
     }    
 }
   

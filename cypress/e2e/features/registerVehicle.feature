@@ -1,3 +1,4 @@
+@Register
 Feature: Register vehicle
     As a user, I want to access the Tricentis website
     To apply for vehicle insurance

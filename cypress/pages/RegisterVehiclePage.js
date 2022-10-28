@@ -2,8 +2,7 @@ class RegisterVehiclePage {
 
     el ={
         logo: () => cy.get('#tricentis_logo'),
-        sectionName: () => cy.get('span#selectedinsurance'),
-        successMessage: () => cy.xpath('/html/body/div[4]/h2', { timeout: 10000 })
+        sectionName: () => cy.get('span#selectedinsurance')
     }
 
     login(){
@@ -16,9 +15,7 @@ class RegisterVehiclePage {
     }
 
     validateMessage(){
-        cy.on('window:alert', (str) => {
-            return expect(str).to.contains('Sending e-mail success!')
-        })
+        cy.contains('h2', 'Sending e-mail success!').should('be.visible')
     }
 }
   
