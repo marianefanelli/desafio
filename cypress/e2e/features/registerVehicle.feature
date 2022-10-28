@@ -6,15 +6,11 @@ Feature: Register vehicle
         Given I access the Tricentis website
         And I want to register my vehicle
 
-    Scenario Outline: Register vehicle
-        When I fill in the "<name>" form
-        #And I click on the Next button
-        #And I fill in the Send Quote form
-        #And I click on the Send button
-        #Then I can see a successfull message 
-    Examples:
-        | name                |
-        | Enter Vehicle Data  |
-        #| Enter Insurant Data |
-        #| Enter Product Data  | 
-        #| Select Price Option |
+    Scenario: Register vehicle
+        When I fill in the "Enter Vehicle Data" form
+        And I fill in the "Enter Insurant Data" form
+        And I fill in the "Enter Product Data" form
+        And I fill in the "Select Price Option" form
+        And I fill in the "Send Quote" form
+        Then I can see a successfull message 
+

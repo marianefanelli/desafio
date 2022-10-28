@@ -1,48 +1,25 @@
 class RegisterVehiclePage {
-    el = {
-        logo: '#tricentis_logo',
-        sectionName: 'span#selectedinsurance',
-        selectMake: 'select#make',
-        selectModel: 'select#model',
-        inputCcm: 'input[name="Cylinder Capacity"]',
-        inputEngPerformance: 'input#engineperformance'
 
+    el ={
+        logo: () => cy.get('#tricentis_logo'),
+        sectionName: () => cy.get('span#selectedinsurance'),
+        successMessage: () => cy.xpath('/html/body/div[4]/h2', { timeout: 10000 })
     }
 
     login(){
-        cy.visit("http://sampleapp.tricentis.com/101/app.php")
+        return cy.visit("http://sampleapp.tricentis.com/101/app.php")
     }
 
     validateRegisterPage(){
-        cy
-            .get(el.logo).should('exist')
-            .get(el.sectionName).should('be.visible')
+        this.el.logo().should('exist')
+        this.el.sectionName().should('be.visible')
     }
 
-    fillInForm(form) {
-        if(form == "Enter Vehicle Data"){
-            return this.fillVehicleDataForm()
-        }else if(form == "Enter Insurant Data"){
-            return this.fillInsurantData()
-        }else if(form == "Enter Product Data"){
-            return this.fillProductData()
-        }else if(form == "Select Price Option"){
-            return this.fillPriceOption()
-        }
-        return null
+    validateMessage(){
+        cy.on('window:alert', (str) => {
+            return expect(str).to.contains('Sending e-mail success!')
+        })
     }
-
-    fillVehicleDataForm() {
-        return cy
-            .get(el.selectMake).select('Audi')
-            .get(el.selectModel).select('Scooter')
-            .get(el.inputCcm).type('2')
-            .get(el.inputEngPerformance).type('20')
-    }
-
-
-
-
 }
   
-  module.exports = new RegisterVehiclePage();
+module.exports = new RegisterVehiclePage();
